@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    let places = [Place(name: "KetchUp Burgers", location: "6ая линия", type: "Ресторан", imagePlace: "KetchUp Burgers")]
+    let places = Place.getPlace()
     
 
     override func viewDidLoad() {
@@ -49,6 +49,7 @@ class MainViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func cancelAction(_segue: UIStoryboardSegue) {
 }
 
+}
