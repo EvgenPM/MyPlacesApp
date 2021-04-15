@@ -239,11 +239,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Place" id="cnV-qK-x6F">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="GV7-m3-ny3"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="GV7-m3-ny3">
+                            <connections>
+                                <action selector="cancelAction:" destination="YC7-jd-5ng" id="VGn-Sy-BW9"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ucx-hu-NsP">
                             <connections>
-                                <action selector="saveButton:" destination="YC7-jd-5ng" id="phK-8B-iJm"/>
-                                <segue destination="0VP-Mp-sit" kind="unwind" unwindAction="unwingSequeWith_segue:" id="x9K-95-xIQ"/>
+                                <segue destination="0VP-Mp-sit" kind="unwind" unwindAction="unwindSegueWith_segue:" id="QGs-Vj-9b9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

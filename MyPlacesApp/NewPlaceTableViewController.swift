@@ -10,13 +10,17 @@ import UIKit
 
 class NewPlaceTableViewController: UITableViewController {
     var newPlace: Place?
+    var imageIsChanged = false
     @IBOutlet weak var imageOfPlace: UIImageView!
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var saveOutlet: UIBarButtonItem!
     @IBOutlet weak var placeType: UITextField!
-    @IBAction func saveButton(_ sender: UIBarButtonItem) {
+  
+    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +57,15 @@ class NewPlaceTableViewController: UITableViewController {
         }
     }
     func saveNewPlace() {
-        newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, restImage: nil, image: imageOfPlace.image)
+        var image:UIImage?
+        if imageIsChanged {
+            image = imageOfPlace.image
+        } else {
+            image = #imageLiteral(resourceName: "noimage")
+        }
+        
+        
+        newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, restImage: nil, image:image)
     }
 }
 
@@ -81,10 +93,12 @@ extension NewPlaceTableViewController: UIImagePickerControllerDelegate,UINavigat
             present(imagePicker, animated: true)
         }
     }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
         imageOfPlace.image = info[.editedImage] as? UIImage
         imageOfPlace.contentMode = .scaleAspectFill
         imageOfPlace.clipsToBounds = true
+        imageIsChanged = true
         dismiss(animated: true)
         
     }
