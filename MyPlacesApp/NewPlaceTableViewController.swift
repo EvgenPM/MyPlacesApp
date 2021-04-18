@@ -9,7 +9,9 @@
 import UIKit
 
 class NewPlaceTableViewController: UITableViewController {
-    var newPlace = Place()
+    
+    //var newPlace = Place()
+    var currentPlace: Place?
     var imageIsChanged = false
     @IBOutlet weak var imageOfPlace: UIImageView!
     @IBOutlet weak var placeName: UITextField!
@@ -32,6 +34,7 @@ class NewPlaceTableViewController: UITableViewController {
   */
         tableView.tableFooterView = UIView()
         saveOutlet.isEnabled = true
+        setupEditScreen()
        // placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
     }
     
@@ -62,7 +65,8 @@ class NewPlaceTableViewController: UITableViewController {
             view.endEditing(true)
         }
     }
-    func saveNewPlace() {
+    func savePlace() {
+        
         var image:UIImage?
         if imageIsChanged {
             image = imageOfPlace.image
@@ -70,10 +74,46 @@ class NewPlaceTableViewController: UITableViewController {
             image = #imageLiteral(resourceName: "noimage")
         }
         
+        let imageData = image?.pngData()
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+        
+        if currentPlace != nil {
+            try! realm.write {
+                currentPlace?.name = newPlace.name
+                currentPlace?.location = newPlace.location
+                currentPlace?.type = newPlace.type
+                currentPlace?.imageData = newPlace.imageData
+            }
+        } else {
+                StorageManager.saveObject(_place: newPlace)
+}
+        
+    }
+    
+      private func setupEditScreen() {
+            if currentPlace != nil {
+            
+                setupNavigationBar()
+                imageIsChanged = true
+                
+                guard let data = currentPlace?.imageData,let image = UIImage(data: data) else { return }
+                imageOfPlace.image = image
+                imageOfPlace.contentMode = .scaleAspectFill
+                placeName.text = currentPlace?.name
+                placeType.text = currentPlace?.type
+                placeLocation.text = currentPlace?.location
+            }
+        }
+        
+          private func setupNavigationBar() {
+            navigationItem.leftBarButtonItem = nil
+            title = currentPlace?.name
+            saveOutlet.isEnabled = true
+        }
         
       //  newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, restImage: nil, image:image)
     }
-}
+
 
 extension NewPlaceTableViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
