@@ -6,23 +6,33 @@
 //  Copyright © 2021 admin. All rights reserved.
 //
 
-import UIKit
-struct Place {
-    var name: String
-    var location: String?
-    var type: String?
-    var restImage: String?
-    var image:UIImage?
+import RealmSwift
+class Place:Object {
+    @objc dynamic var name = ""
+    @objc dynamic var location: String?
+    @objc dynamic var type: String?
+    @objc dynamic var restImage: String?
+    @objc dynamic var imageData: Data?
     
-    static let testData = ["Y2","Taller","Molly","Buro"]
     
-    static func getPlace() -> [Place] {
-        var places = [Place]()
-        for place in testData {
-            places.append(Place(name: place, location: "Spb", type: "Bar", restImage: place, image: nil))
+    /* test array and method for its downloading
+    let testData = ["Y2","Taller","Molly","Buro"]
+    
+    func savePlaces() {
+    for place in testData {
+        
+    let image = UIImage(named: place)
+    guard let imageData = image?.pngData() else { return }
+        
+    let newPlace = Place()
+        
+    newPlace.name = place
+    newPlace.location = "SPb"
+    newPlace.type = "Bar"
+    newPlace.imageData = imageData
+      
+        StorageManager.saveObject(_place: newPlace)
         }
-        return places
     }
-    
-    
+    */
 }
