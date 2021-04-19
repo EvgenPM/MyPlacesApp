@@ -188,9 +188,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <segmentedControl key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="5PS-uX-o4D">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <segments>
+                                        <segment title="Date"/>
+                                        <segment title="Name"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="segmentedControlAction:" destination="WkC-Qn-OCK" eventType="valueChanged" id="Pqn-Wv-SDo"/>
+                                    </connections>
+                                </segmentedControl>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="uHY-Zb-pPm" customClass="CustomTableViewCell" customModule="MyPlacesApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="85"/>
+                                        <rect key="frame" x="0.0" y="60" width="414" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uHY-Zb-pPm" id="ETX-uX-xju">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="85"/>
@@ -257,20 +268,16 @@
                                     <outlet property="delegate" destination="WkC-Qn-OCK" id="qeo-yb-yGm"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="hs0-kt-ikb">
-                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Date"/>
-                                    <segment title="Name"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="xfy-Uq-Fgd"/>
                     </view>
                     <navigationItem key="navigationItem" title="My Places" id="swb-Z5-PZE">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="IDM-pR-qYn"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="IDM-pR-qYn">
+                            <connections>
+                                <action selector="sortButtonAction:" destination="WkC-Qn-OCK" id="SkI-a1-HwP"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="KIb-8Z-Lco">
                             <connections>
                                 <segue destination="Co9-Qo-w0H" kind="presentation" id="Awh-1X-SbR"/>
@@ -278,6 +285,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="segmentedControl" destination="5PS-uX-o4D" id="VrE-y6-U0G"/>
+                        <outlet property="sortButton" destination="IDM-pR-qYn" id="y8w-gX-MqY"/>
                         <outlet property="tableView" destination="OVC-J4-6oV" id="AY1-Cb-kFR"/>
                     </connections>
                 </viewController>

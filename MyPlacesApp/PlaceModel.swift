@@ -13,6 +13,8 @@ class Place:Object {
     @objc dynamic var type: String?
     @objc dynamic var restImage: String?
     @objc dynamic var imageData: Data?
+    // add new var for sorting
+    @objc dynamic var date = Date()
     
     
     convenience init(name: String,location: String?,type: String?,imageData: Data?) {
@@ -27,7 +29,7 @@ class Place:Object {
     let testData = ["Y2","Taller","Molly","Buro"]
     
     func savePlaces() {
-    for place in testData {
+    
         
     let image = UIImage(named: place)
     guard let imageData = image?.pngData() else { return }
