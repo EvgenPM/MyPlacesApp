@@ -19,6 +19,9 @@ class MainViewController: UIViewController,UITableViewDataSource,UITableViewDele
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
     }
+    var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var sortButton: UIBarButtonItem!
@@ -42,6 +45,9 @@ class MainViewController: UIViewController,UITableViewDataSource,UITableViewDele
  
 
       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return searchResult.count
+        }
         return places.isEmpty ? 0: places.count
     }
 
@@ -49,7 +55,13 @@ class MainViewController: UIViewController,UITableViewDataSource,UITableViewDele
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        let place = places[indexPath.row]
+        var place = Place()
+        if isFiltering {
+            place = searchResult[indexPath.row]
+        } else {
+            place = places[indexPath.row]
+        }
+      
         
         cell.nameLabel?.text = place.name
         cell.typeLabel.text = place.type
@@ -87,7 +99,12 @@ class MainViewController: UIViewController,UITableViewDataSource,UITableViewDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow else {return}
-            let place = places[indexPath.row]
+            let place: Place
+            if isFiltering {
+                   place = searchResult[indexPath.row]
+               } else {
+                   place = places[indexPath.row]
+               }
             let newPlaceVC = segue.destination as! NewPlaceTableViewController
             newPlaceVC.currentPlace = place
         }

@@ -35,6 +35,7 @@ class NewPlaceTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         saveOutlet.isEnabled = true
         setupEditScreen()
+        
        // placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
     }
     
