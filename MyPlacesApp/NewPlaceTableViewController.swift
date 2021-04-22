@@ -39,7 +39,8 @@ class NewPlaceTableViewController: UITableViewController {
             self.newPlace.savePlaces()
         }
   */
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0,
+                                                         width: tableView.frame.size.width, height: 1))
         saveOutlet.isEnabled = true
         setupEditScreen()
         
@@ -83,7 +84,8 @@ class NewPlaceTableViewController: UITableViewController {
         }
         
         let imageData = image?.pngData()
-        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData,rating: currentRating)
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text,
+                             type: placeType.text, imageData: imageData,rating: currentRating)
         
         if currentPlace != nil {
             try! realm.write {

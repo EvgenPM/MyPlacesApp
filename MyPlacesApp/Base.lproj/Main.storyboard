@@ -160,8 +160,15 @@
                                                         <userDefinedRuntimeAttribute type="number" keyPath="starSize">
                                                             <real key="value" value="34"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="filledStar"/>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="emptyStar"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                                            <color key="value" red="0.99554616210000002" green="0.46560528880000002" blue="0.67132078660000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="minTouchRating">
+                                                            <real key="value" value="0.0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                                            <color key="value" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -282,8 +289,18 @@
                                                         <userDefinedRuntimeAttribute type="number" keyPath="starSize">
                                                             <real key="value" value="16"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="filledStar"/>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="emptyStar"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                                            <color key="value" red="0.99554616210000002" green="0.46560528880000002" blue="0.67132078660000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                                            <integer key="value" value="0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="minTouchRating">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                                            <color key="value" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
@@ -300,6 +317,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="cosmosView" destination="7xV-ex-XDf" id="DAE-8N-7YU"/>
                                             <outlet property="imageOfPlace" destination="2g4-Sh-BTJ" id="PUC-kW-Y1K"/>
                                             <outlet property="locationLabel" destination="ZGW-Q5-kyd" id="MCg-B3-9Nj"/>
                                             <outlet property="nameLabel" destination="6wW-4F-QCK" id="cgT-VO-dCn"/>
@@ -386,8 +404,6 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AZ" width="25" height="24"/>
-        <image name="emptyStar" width="255" height="256"/>
-        <image name="filledStar" width="237.5" height="238"/>
         <image name="noimage" width="1920" height="1280"/>
     </resources>
 </document>

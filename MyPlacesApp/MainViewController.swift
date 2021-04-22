@@ -77,6 +77,7 @@ class MainViewController: UIViewController,UITableViewDataSource,UITableViewDele
         cell.locationLabel.text = place.location
         cell.imageOfPlace?.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
         cell.imageOfPlace?.clipsToBounds = true
+        cell.cosmosView.rating = place.rating
 
 
         return cell
