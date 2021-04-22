@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Cosmos
 
 class NewPlaceTableViewController: UITableViewController {
     
     //var newPlace = Place()
     var currentPlace: Place?
     var imageIsChanged = false
+    var currentRating = 0.0
+    
     @IBOutlet weak var imageOfPlace: UIImageView!
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
@@ -23,9 +26,13 @@ class NewPlaceTableViewController: UITableViewController {
         dismiss(animated: true)
     }
     
+    @IBOutlet weak var cosmosView: CosmosView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cosmosView.didTouchCosmos = { rating in
+            self.currentRating = rating
+        }
        
    /* download test data
         DispatchQueue.main.async {
@@ -76,7 +83,7 @@ class NewPlaceTableViewController: UITableViewController {
         }
         
         let imageData = image?.pngData()
-        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData,rating: currentRating)
         
         if currentPlace != nil {
             try! realm.write {
@@ -84,6 +91,7 @@ class NewPlaceTableViewController: UITableViewController {
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.imageData = newPlace.imageData
+                currentPlace?.rating = newPlace.rating
             }
         } else {
                 StorageManager.saveObject(_place: newPlace)
@@ -103,6 +111,7 @@ class NewPlaceTableViewController: UITableViewController {
                 placeName.text = currentPlace?.name
                 placeType.text = currentPlace?.type
                 placeLocation.text = currentPlace?.location
+                cosmosView.rating = currentPlace!.rating
             }
         }
         
